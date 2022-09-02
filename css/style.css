@@ -1,5 +1,14 @@
-nav {
-    border: 10px solid black;
+body {
+    background-color: darkslategrey;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 5px solid black;
+    background-color: black;
+    color: whitesmoke;
 }
 
 main {
