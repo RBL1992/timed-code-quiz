@@ -8,18 +8,33 @@
     <title>Document</title>
 </head>
 <body>
-    <nav>
-        <!-- view highscores "storag" and display count down timer -->
-    </nav>
+    <nav class="scores"><a href="./highscoresHistory.html"> HIGH SCORES</a></nav>
 
-    <main>
+    <nav class="timer">Remaining Time:</nav>
+
+    <div>
         <h1>Coding Quiz Challenge</h1>
         <br>
         <p>Try to answer the following code-related questoins within the time limit. Keep in mind that incorrect answers will penalize your scoretime by ten seconds!</p>
         <br>
-        <button id="startquiz">Start Quiz</button>
-    </main>
+        <button id="start-quiz">Start Quiz</button>
+    </div>
 
-    <script src="script.js"></script>
+    <div id="Question">
+        <p id='New-Question'></p>
+        <ol id="list-of-avaible-answers"></ol>
+    </div>
+
+    <div>
+        <h2>Game Over!</h2>
+        <p>Your score is </p>
+        <p>
+            Enter ID: <input type="text">
+            <button id='submit-button'>Submit</button>
+        </p>
+    </div>
+
+    <script src="./js/questions.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
