@@ -6,12 +6,25 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 5px solid black;
-    background-color: black;
+    border: 1px solid maroon;
     color: whitesmoke;
 }
 
-main {
+.main-page {
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 }
+
+.start-button button {
+    font-size: 25px;
+    font-weight: 500;
+    color:maroon;
+    padding: 15px 30px;
+    border-radius: 5px;
+    background: whitesmoke;
+    cursor: pointer;
+}
+

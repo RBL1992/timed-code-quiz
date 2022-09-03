@@ -1,12 +1,12 @@
 var startButton = document.getElementById("#start-quiz");
-// console.log(startButton);
 var startQuizButton = document.querySelector("#start-quiz");
 
 startQuizButton.addEventListener("click", function (event) {
     event.preventDefault();
-    // console.log(startQuizButton);
+    console.log(startQuizButton);
 
     function timer() {
+        document.getElementById(".timer").innerHTML = "Remaining time:" + remainingTime;
         var remainingTime = 2400;
         var countDown = setInterval(function () {
             if (remainingTime > 1) {
@@ -19,6 +19,6 @@ startQuizButton.addEventListener("click", function (event) {
                 startButton.textContent = '';
                 clearInterval(countDown);
             }
-        }, 1000)
-    }    
- });
+        }(timer(), 1000));
+    };        
+});
