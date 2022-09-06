@@ -2,7 +2,7 @@ var startPage = document.querySelector(".main-page");
 var questionBox = document.querySelector("#Question");
 var startQuizButton = document.querySelector(".start-button");
 var timerCountdown = document.querySelector(".timer");
-var remainingTime = 6000;
+var remainingTime = 6000; 
 
 startQuizButton.addEventListener("click", countDown);
     function countDown() {
@@ -25,5 +25,5 @@ startQuizButton.addEventListener("click", countDown);
 
 
 function startQuiz(){
-    questionBox.style.display
+    
 }
