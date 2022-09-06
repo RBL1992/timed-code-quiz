@@ -2,7 +2,10 @@ var startPage = document.querySelector(".main-page");
 var questionBox = document.querySelector("#Question");
 var startQuizButton = document.querySelector(".start-button");
 var timerCountdown = document.querySelector(".timer");
-var remainingTime = 6000; 
+var remainingTime = 6000;
+var questionIndex = 0; 
+var currentQuestion = document.querySelector('#New-Question') 
+var answerChoices = document.querySelector('#list-of-avaible-answers')
 
 startQuizButton.addEventListener("click", countDown);
     function countDown() {
@@ -25,5 +28,21 @@ startQuizButton.addEventListener("click", countDown);
 
 
 function startQuiz(){
-    
+    var viewableQuestion = questions[questionIndex];
+
+    currentQuestion.textContent = viewableQuestion.question;
+
+
+    for(var i = 0; i < viewableQuestion.choices.length; i++){
+        var choice = viewableQuestion.choices[i];
+        var choiceBtn = document.createElement('button');
+        choiceBtn.setAttribute('class','choice');
+        choiceBtn.setAttribute('value', choice);
+
+        choiceBtn.textContent = i + 1 + '.' + choice;
+
+        answerChoices.appendChild(choiceBtn);
+
+    }
+
 }
