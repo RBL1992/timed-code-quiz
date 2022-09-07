@@ -6,11 +6,16 @@ var remainingTime = 100;
 var questionIndex = 0;
 var currentQuestion = document.querySelector('#New-Question');
 var answerChoices = document.querySelector('#list-of-avaible-answers');
-var initialsBox = document.querySelector('.initialsInput');
+var initialsBox = document.querySelector('.initials-input');
 var endOfQuizScreen = document.querySelector('.end-screen');
 var countDown;
+var initialBtn = document.querySelector('#submit-button');
 
 questionBox.addEventListener('click', nextQuestion);
+initialBtn.addEventListener('click', function(){
+    // 
+    endGame();
+});
 
 startQuizButton.addEventListener("click", timer);
 function timer() {
@@ -80,6 +85,7 @@ function nextQuestion(event) {
 }
 
 function endGame() {
+    // alert('working');
     clearInterval(countDown);
     currentQuestion.innerHTML = "";
     answerChoices.innerHTML = "";
@@ -87,7 +93,7 @@ function endGame() {
     var initials = initialsBox.value;
 
     if (initials !== '') {
-        var score = JSON.parse(window.localStorage.getItem('HIGH SCORES')) || [];
+        var score = JSON.parse(window.localStorage.getItem('score')) || [];
 
         var newScore = {
             score: remainingTime,
@@ -97,7 +103,7 @@ function endGame() {
         score.push(newScore);
         window.localStorage.setItem('score', JSON.stringify(score));
 
-        window.localStorage.href = 'highscoresHistory.html';
+        window.location.href = 'highscoresHistory.html';
 
     }
 }
