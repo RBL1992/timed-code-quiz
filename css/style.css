@@ -6,8 +6,12 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid maroon;
     color: whitesmoke;
+}
+
+.scores a {
+    color: whitesmoke;
+    text-decoration: none;
 }
 
 .main-page {
@@ -26,5 +30,9 @@ body {
     border-radius: 5px;
     background: whitesmoke;
     cursor: pointer;
+}
+
+.end-screen {
+    display: none;
 }
 
