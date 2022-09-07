@@ -24,6 +24,7 @@ function countDown() {
             remainingTime--;
         } else {
             timerCountdown.textContent = '';
+            endGame();
             clearInterval(countDown);
         }
     }, 1000);
@@ -32,6 +33,9 @@ function countDown() {
 
 
 function startQuiz() {
+    // clear the board... and render next question in []
+    currentQuestion.innerHTML = "";
+    answerChoices.innerHTML = "";
     var viewableQuestion = questions[questionIndex];
 
     currentQuestion.textContent = viewableQuestion.question;
@@ -57,18 +61,26 @@ function nextQuestion(event) {
     // console.log(isChoiceBtn);
 
     if (isChoiceBtn) {
-
+        //wrong choice
         if (choice.value !== questions[questionIndex].answer) {
             remainingTime -= 15;
         }
 
-        if (remainingTime < 0) {
-            remainingTime = 0;
+        // if (remainingTime < 0) {
+        //     remainingTime = 0;
+        // }
+        // remainingTime.textContent = remainingTime;
+        // correct choice
+        if (choice.value == questions[questionIndex].answer){
+            questionIndex++;
+            //we are out of questions so end game
+            if (questionIndex >= questions.length) {
+                endGame();
+            } else {
+                startQuiz();
+            }
         }
-        remainingTime.textContent = remainingTime;
-
-        // questionIndex++;
-
+    
         // if (remainingTime <= 0 || questionIndex === questions.length) {
         //     endQuiz();
         // } else {
@@ -77,27 +89,30 @@ function nextQuestion(event) {
     }
 }
 
-function saveScore() {
-    var initials = initialsBox.value;
-
-    if (initials !== '') {
-        var score = JSON.parse(window.localStorage.getItem('HIGH SCORES')) || [];
-
-        var newScore = {
-            score: remainingTime,
-            initials: initials,
-        };
-
-        score.push(newScore);
-        window.localStorage.setItem('score', JSON.stringify(score));
-
-        window.localStorage.href = 'highscoresHistory.html';
-
-    }
+function endGame() {
+    console.log('game over man');
 }
+// function saveScore() {
+//     var initials = initialsBox.value;
 
-function checkForSubmission(event) {
-    if (event.key === 'Enter') {
-        saveScore();
-    }
-}
+//     if (initials !== '') {
+//         var score = JSON.parse(window.localStorage.getItem('HIGH SCORES')) || [];
+
+//         var newScore = {
+//             score: remainingTime,
+//             initials: initials,
+//         };
+
+//         score.push(newScore);
+//         window.localStorage.setItem('score', JSON.stringify(score));
+
+//         window.localStorage.href = 'highscoresHistory.html';
+
+//     }
+// }
+
+// function checkForSubmission(event) {
+//     if (event.key === 'Enter') {
+//         saveScore();
+//     }
+// }

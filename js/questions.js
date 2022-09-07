@@ -11,12 +11,12 @@ var questions = [
     },
     {
         question: "What is an object in JavaScript?",
-        choices: ["an object is a collection of properties..whereas property is the association between a key and a value ", "something that falls out of the sky", "the thing my grandma hit with her car"],
+        choices: ["an object is a collection of properties..whereas property is the association between a key and a value", "something that falls out of the sky", "the thing my grandma hit with her car"],
         answer: "an object is a collection of properties..whereas property is the association between a key and a value",
     },
     {
         question: "What method attaches an event handler to specified elements?",
         choices: ["removeEventListener()", "attachEventListener()", "addEventListener()"],
-        correct : "addEventListener()",
+        answer : "addEventListener()",
     },
 ];
