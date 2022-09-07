@@ -8,14 +8,15 @@ var currentQuestion = document.querySelector('#New-Question');
 var answerChoices = document.querySelector('#list-of-avaible-answers');
 var initialsBox = document.querySelector('.initialsInput');
 var endOfQuizScreen = document.querySelector('.end-screen');
+var countDown;
 
 questionBox.addEventListener('click', nextQuestion);
 
-startQuizButton.addEventListener("click", countDown);
-function countDown() {
+startQuizButton.addEventListener("click", timer);
+function timer() {
     startPage.style.display = "none";
     questionBox.style.display = "block";
-    var countDown = setInterval(function () {
+    countDown = setInterval(function () {
         if (remainingTime > 1) {
             timerCountdown.textContent = remainingTime + ' seconds remaining';
             remainingTime--;
@@ -65,11 +66,6 @@ function nextQuestion(event) {
         if (choice.value !== questions[questionIndex].answer) {
             remainingTime -= 15;
         }
-
-        // if (remainingTime < 0) {
-        //     remainingTime = 0;
-        // }
-        // remainingTime.textContent = remainingTime;
         // correct choice
         if (choice.value == questions[questionIndex].answer){
             questionIndex++;
@@ -80,36 +76,31 @@ function nextQuestion(event) {
                 startQuiz();
             }
         }
-    
-        // if (remainingTime <= 0 || questionIndex === questions.length) {
-        //     endQuiz();
-        // } else {
-        //     // nextQuestion(); am i calling the wrong function?
-        // }  Remove first question
     }
 }
 
 function endGame() {
-    console.log('game over man');
+    clearInterval(countDown);
+    currentQuestion.innerHTML = "";
+    answerChoices.innerHTML = "";
+    endOfQuizScreen.style.display = "block";
+    var initials = initialsBox.value;
+
+    if (initials !== '') {
+        var score = JSON.parse(window.localStorage.getItem('HIGH SCORES')) || [];
+
+        var newScore = {
+            score: remainingTime,
+            initials: initials,
+        };
+
+        score.push(newScore);
+        window.localStorage.setItem('score', JSON.stringify(score));
+
+        window.localStorage.href = 'highscoresHistory.html';
+
+    }
 }
-// function saveScore() {
-//     var initials = initialsBox.value;
-
-//     if (initials !== '') {
-//         var score = JSON.parse(window.localStorage.getItem('HIGH SCORES')) || [];
-
-//         var newScore = {
-//             score: remainingTime,
-//             initials: initials,
-//         };
-
-//         score.push(newScore);
-//         window.localStorage.setItem('score', JSON.stringify(score));
-
-//         window.localStorage.href = 'highscoresHistory.html';
-
-//     }
-// }
 
 // function checkForSubmission(event) {
 //     if (event.key === 'Enter') {
