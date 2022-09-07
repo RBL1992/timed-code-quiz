@@ -2,12 +2,14 @@ var startPage = document.querySelector(".main-page");
 var questionBox = document.querySelector("#Question");
 var startQuizButton = document.querySelector(".start-button");
 var timerCountdown = document.querySelector(".timer");
-var remainingTime = 6000;
+var remainingTime = 100;
 var questionIndex = 0;
 var currentQuestion = document.querySelector('#New-Question');
 var answerChoices = document.querySelector('#list-of-avaible-answers');
 var initialsBox = document.querySelector('.initialsInput');
 var endOfQuizScreen = document.querySelector('.end-screen');
+
+questionBox.addEventListener('click', nextQuestion);
 
 startQuizButton.addEventListener("click", countDown);
 function countDown() {
@@ -41,7 +43,7 @@ function startQuiz() {
         choiceBtn.setAttribute('class', 'choice');
         choiceBtn.setAttribute('value', choice);
 
-        choiceBtn.textContent = i + 1 + '.' + choice;
+        choiceBtn.textContent = i + 1 + '. ' + choice;
 
         answerChoices.appendChild(choiceBtn);
 
@@ -50,32 +52,32 @@ function startQuiz() {
 }
 
 function nextQuestion(event) {
-    var clicked = event.target;
+    var isChoiceBtn = event.target.classList.contains('choice');
+    var choice = event.target
+    // console.log(isChoiceBtn);
 
-    if (!clicked.matches('.choice')) {
-        return;
+    if (isChoiceBtn) {
+
+        if (choice.value !== questions[questionIndex].answer) {
+            remainingTime -= 15;
+        }
+
+        if (remainingTime < 0) {
+            remainingTime = 0;
+        }
+        remainingTime.textContent = remainingTime;
+
+        // questionIndex++;
+
+        // if (remainingTime <= 0 || questionIndex === questions.length) {
+        //     endQuiz();
+        // } else {
+        //     // nextQuestion(); am i calling the wrong function?
+        // }  Remove first question
     }
-
-    if (clicked.value !== questions[questionIndex].answer) {
-        time -= 15;
-    }
-
-    if (remainingTime < 0) {
-        remainingTime = 0;
-    }
-    remainingTime.textContent = remainingTime;
-
-    questionIndex++;
-
-    if (remainingTime <= 0 || questionIndex === questions.length) {
-        endQuiz();
-    } else {
-        // nextQuestion(); am i calling the wrong function?
-    }
-
 }
 
-function saveScore(){
+function saveScore() {
     var initials = initialsBox.value;
 
     if (initials !== '') {
@@ -95,7 +97,7 @@ function saveScore(){
 }
 
 function checkForSubmission(event) {
-    if (event.key === 'Enter'){
+    if (event.key === 'Enter') {
         saveScore();
     }
 }
