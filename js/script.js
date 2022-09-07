@@ -13,7 +13,6 @@ var initialBtn = document.querySelector('#submit-button');
 
 questionBox.addEventListener('click', nextQuestion);
 initialBtn.addEventListener('click', function(){
-    // 
     endGame();
 });
 
@@ -93,15 +92,15 @@ function endGame() {
     var initials = initialsBox.value;
 
     if (initials !== '') {
-        var score = JSON.parse(window.localStorage.getItem('score')) || [];
+        var userScore = JSON.parse(window.localStorage.getItem('userScore')) || [];
 
         var newScore = {
             score: remainingTime,
             initials: initials,
         };
-
-        score.push(newScore);
-        window.localStorage.setItem('score', JSON.stringify(score));
+        // console.log(newScore);
+        userScore.push(newScore);
+        window.localStorage.setItem('userScore', JSON.stringify(userScore));
 
         window.location.href = 'highscoresHistory.html';
 
@@ -109,7 +108,9 @@ function endGame() {
 }
 
 // function checkForSubmission(event) {
+//     var isEnterScoreBtn = event.target.classList.contains('initials-input');
+//     var initialsBox = event.target
 //     if (event.key === 'Enter') {
-//         saveScore();
+//         localStorage.setItem("initialsBox", JSON.stringify(initialsBox));
 //     }
 // }
