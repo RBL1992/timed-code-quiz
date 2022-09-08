@@ -12,9 +12,6 @@ var countDown;
 var initialBtn = document.querySelector('#submit-button');
 
 questionBox.addEventListener('click', nextQuestion);
-initialBtn.addEventListener('click', function(){
-    endGame();
-});
 
 startQuizButton.addEventListener("click", timer);
 function timer() {
@@ -92,25 +89,30 @@ function endGame() {
     var initials = initialsBox.value;
 
     if (initials !== '') {
-        var userScore = JSON.parse(window.localStorage.getItem('userScore')) || [];
 
+        // First time score entered - []
+        // Second time score entered - [newScore]
+        var scoresHistory = [];
+        if(window.localStorage.getItem('history')) {
+         scoresHistory = JSON.parse(window.localStorage.getItem('history'));
+        }
+        // var scoresHistory = JSON.parse(window.localStorage.getItem('history') || []);
+         
         var newScore = {
             score: remainingTime,
             initials: initials,
         };
         // console.log(newScore);
-        userScore.push(newScore);
-        window.localStorage.setItem('userScore', JSON.stringify(userScore));
-
+        scoresHistory.push(newScore);
+        // Saving to local storage 1st enry - [newScore]
+        //Second time saving to local storage, prior entry, and new entry [newScore1, newScore2]
+        window.localStorage.setItem('history', JSON.stringify(scoresHistory));
+        initialsBox.value = '';
         window.location.href = 'highscoresHistory.html';
 
     }
 }
 
-// function checkForSubmission(event) {
-//     var isEnterScoreBtn = event.target.classList.contains('initials-input');
-//     var initialsBox = event.target
-//     if (event.key === 'Enter') {
-//         localStorage.setItem("initialsBox", JSON.stringify(initialsBox));
-//     }
-// }
+initialBtn.addEventListener('click', function(){
+    endGame();
+});
